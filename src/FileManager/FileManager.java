@@ -4,28 +4,31 @@ import java.io.File;
 import java.io.IOException;
 
 public abstract class FileManager {
-    private static Data dataBase;
+    private static DataManager dataManager;
     private static File fileMatrix;
     private static File fileOutput;
 
 
-    public static void defineFile(String filePathM, String filePathO) {
+    public static void defineFile(String filePathM) {
         fileMatrix = new File(filePathM);
-        fileOutput = new File(filePathO);
+        fileOutput = new File("output.txt");
     }
 
     public static void loadData() throws IOException {
         try {
-            dataBase = new Data(fileMatrix);
+            dataManager = new DataManager(fileMatrix);
         } catch (IOException e) {
             throw e;
         }
     }
 
     public static void saveData() throws IOException {
-        dataBase.save(fileOutput);
+        dataManager.save(fileOutput);
     }
 
+    public static void printMatrix() {
+        dataManager.print();
+    }
 
 
 }
