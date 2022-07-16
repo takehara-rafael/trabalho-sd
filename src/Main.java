@@ -10,10 +10,10 @@ public class Main {
         System.out.println("What's the file name?");
         String fileName = scanner.nextLine();
          */
+        
         String fileName = "test.txt";
         FileManager.defineFile(fileName);
         FileManager.loadData();
-        FileManager.printMatrix();
         FileManager.saveData();
     }
 }

@@ -26,9 +26,5 @@ public abstract class FileManager {
         dataManager.save(fileOutput);
     }
 
-    public static void printMatrix() {
-        dataManager.print();
-    }
-
 
 }

@@ -2,10 +2,7 @@ package FileManager;
 
 import Matrix.Matrix;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class DataManager {
@@ -21,9 +18,9 @@ public class DataManager {
                 int posX, posY;
                 posX = scanner.nextInt();
                 posY = scanner.nextInt();
-                matrix.setImageR(posX, posY, scanner.nextFloat());
-                matrix.setImageG(posX, posY, scanner.nextFloat());
-                matrix.setImageB(posX, posY, scanner.nextFloat());
+                matrix.setImageR(posX, posY, scanner.nextInt());
+                matrix.setImageG(posX, posY, scanner.nextInt());
+                matrix.setImageB(posX, posY, scanner.nextInt());
             }
             scanner.close();
         } catch (IOException e) {
@@ -33,37 +30,21 @@ public class DataManager {
 
     public void save(File fileOutput) throws IOException {
         try {
-            FileWriter myWriter = new FileWriter(fileOutput);
-            for (int i = matrix.getSize(); i < matrix.getSize(); i++) {
-                for (int j = matrix.getSize(); j < matrix.getSize(); j++){
-                    myWriter.write("<");
-                    myWriter.write(String.format("%.2f", matrix.getImageR(i, j)));
-                    myWriter.write(", ");
-                    myWriter.write(String.format("%.2f", matrix.getImageG(i, j)));
-                    myWriter.write(", ");
-                    myWriter.write(String.format("%.2f", matrix.getImageB(i, j)));
-                    myWriter.write("> ");
+            FileWriter fileWriter = new FileWriter(fileOutput);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            for (int i = 0; i < matrix.getSize(); i++) {
+                for (int j = 0; j < matrix.getSize(); j++){
+                    String content = "< " + matrix.getImageR(i, j) + ", " + matrix.getImageG(i, j) + ", " + matrix.getImageB(i, j) + "> ";
+                    printWriter.print(content);
                 }
-                myWriter.write("\n");
+                printWriter.print("\n");
             }
-            myWriter.close();
+            printWriter.close();
         } catch (IOException e) {
             throw e;
         }
     }
 
-    public void print() {
-        for (int i = 0; i < matrix.getSize(); i++) {
-            for (int j = 0; j < matrix.getSize(); j++) {
-                System.out.print(String.format("%.2f", matrix.getImageR(i, j)));
-                System.out.print(" ");
-                System.out.print(String.format("%.2f", matrix.getImageG(i, j)));
-                System.out.print(" ");
-                System.out.print(String.format("%.2f", matrix.getImageB(i, j)));
-                System.out.print("\n");
-            }
-        }
-    }
 
 
 }
